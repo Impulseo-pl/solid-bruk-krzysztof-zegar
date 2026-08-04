@@ -260,7 +260,7 @@ p{max-width:65ch}
 .gallery-masonry .m-tile .cap small{display:block;font-weight:400;opacity:.78;letter-spacing:.04em;text-transform:uppercase;font-size:.66rem;margin-top:3px}
 .tile{position:relative;overflow:hidden;border-radius:var(--r-md);box-shadow:var(--sh-sm);
   transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
-.tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.22,.61,.36,1)}
 .tile:hover{box-shadow:var(--sh-md)}
 .tile:hover img{transform:scale(1.05)}
 .tile .cap{position:absolute;left:0;right:0;bottom:0;padding:var(--space-5) var(--space-4) var(--space-4);
@@ -424,7 +424,7 @@ section{padding-block:clamp(64px,8vw,128px)}
 /* 7) GATEWAYS — 3 duże bramy-zdjęcia (zamiast paska menu usług) */
 .gateways{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
 .gateway{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r-sm);display:block}
-.gateway img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .5s var(--ease)}
+.gateway img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.22,.61,.36,1),filter .6s cubic-bezier(.22,.61,.36,1)}
 .gateway::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(18,24,28,.74))}
 .gateway:hover img{transform:scale(1.05);filter:brightness(1.05)}
 .gateway .g-ttl{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:var(--space-6) var(--space-5);color:#fff;font-family:var(--font-display);font-size:1.45rem;letter-spacing:-.01em;line-height:1.15}
@@ -762,8 +762,15 @@ section{padding-block:clamp(64px,8vw,128px)}
 .mt-on .mt-ph > picture > img{
   clip-path:inset(0 0 100% 0);
   scale:1.10;
+  /* 04.08.2026 (Agata: „zdjęcia przybliżają się chamsko, na raz"): ta reguła jest
+     PÓŹNIEJSZA i MOCNIEJSZA niż `.tile img{transition:transform .6s}` z bazy, więc
+     nadpisywała całą listę przejść - `transform` (hover-zoom) i `filter` z niej
+     wypadały i skok skali dział się natychmiast, bez animacji. Dlatego obie
+     właściwości MUSZĄ być tu wymienione. Nie kasować przy kolejnych zmianach. */
   transition:clip-path 1.15s var(--mt-ease) var(--mt-d,0s),
-             scale 1.6s var(--mt-ease) var(--mt-d,0s);
+             scale 1.6s var(--mt-ease) var(--mt-d,0s),
+             transform .9s cubic-bezier(.22,.61,.36,1),
+             filter .6s cubic-bezier(.22,.61,.36,1);
 }
 .mt-on .mt-ph.in > img,
 .mt-on .in .mt-ph > img,
