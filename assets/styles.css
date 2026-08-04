@@ -1058,3 +1058,62 @@ footer{view-transition-name:mt-foot}
 .form input:focus,.form textarea:focus{background:#FDFBF5}
 .btn-light{background:#FBF8F0}
 .info-row .ic{background:rgba(100,117,38,.16);color:var(--accent-d)}
+
+/* ============================================================
+   PASEK ZAUFANIA - pełny panel (uwaga Agaty 04.08.2026)
+   Był samotny pill "Ocena 5 w Google · 9 opinii" na środku pustego
+   pasma. Teraz: ciemnozielony kafel z oceną (klikalny w wizytówkę)
+   + trzy konkrety obok, żeby pasmo pracowało na sprzedaż.
+   ============================================================ */
+.trust-bar{background:var(--paper);border-bottom:var(--hairline)}
+.trust-bar .wrap{display:block;padding-block:var(--space-7)}
+.tb-panel{display:grid;grid-template-columns:auto 1fr;align-items:stretch;
+  background:#FDFBF5;border:var(--hairline);border-radius:var(--r-lg);
+  box-shadow:var(--sh-md);overflow:hidden}
+
+/* --- kafel z oceną --- */
+.tb-score{display:flex;align-items:center;gap:clamp(.9rem,2vw,1.4rem);
+  padding:var(--space-6) clamp(1.4rem,3vw,2.4rem);
+  background:var(--dark);color:#fff;text-decoration:none;
+  transition:background var(--dur) var(--ease)}
+.tb-score:hover{background:#2C3E22}
+.tb-score-num{font-family:var(--font-display);font-weight:800;
+  font-size:clamp(2.9rem,5vw,4.1rem);line-height:.88;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.tb-score-meta{display:flex;flex-direction:column;gap:.22rem}
+.tb-stars{display:flex;gap:2px;color:#C7DA8A;line-height:1}
+.tb-score-lab{font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;
+  color:rgba(255,255,255,.8)}
+.tb-score-link{font-size:.84rem;font-weight:600;color:#C7DA8A;
+  display:inline-flex;align-items:center;gap:.35rem;margin-top:.15rem}
+.tb-score-link .arr{transition:transform var(--dur) var(--ease);display:inline-block}
+.tb-score:hover .tb-score-link .arr{transform:translateX(4px)}
+
+/* --- trzy konkrety --- */
+.tb-facts{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(3,1fr)}
+.tb-facts li{display:flex;flex-direction:column;justify-content:center;gap:.3rem;
+  padding:var(--space-5) clamp(1rem,2.4vw,1.8rem);border-left:1px solid var(--line)}
+.tb-facts li::before{content:"";width:26px;height:2px;background:var(--accent);
+  margin-bottom:.55rem;flex:none}
+.tb-f-num{font-family:var(--font-display);font-weight:700;
+  font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.1;color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.tb-f-of{color:var(--accent);font-weight:600}
+.tb-f-lab{font-size:.82rem;line-height:1.4;color:var(--muted)}
+
+@media(max-width:980px){
+  .tb-panel{grid-template-columns:1fr}
+  .tb-score{justify-content:flex-start}
+  .tb-facts{grid-template-columns:1fr}
+  .tb-facts li{border-left:0;border-top:1px solid var(--line)}
+  .tb-facts li:first-child{border-top:0}
+}
+@media(max-width:480px){
+  .tb-score{padding:var(--space-5) var(--space-5)}
+  .tb-score-num{font-size:3rem}
+}
+
+/* hero: pięć gwiazdek zamiast jednej - ta sama informacja, mocniejszy dowód */
+.hf-trust .hf-stars{display:inline-flex;gap:1px;color:#C7DA8A;margin-right:.35rem;vertical-align:-2px}
+.hf-trust strong{font-weight:700;color:#fff}
